@@ -1,0 +1,47 @@
+<div class="py-5 text-center container">
+
+  <form [formGroup]="formModel" [style.fontSize.px]="16" (ngSubmit)="onSubmit()">
+
+    <h1>Sign Up</h1>
+    <div>
+      <mat-form-field appearance="fill" >
+        <mat-label>Name</mat-label>
+        <input formControlName="Name" matInput placeholder="Name" required>
+        <mat-error *ngIf="formModel.controls['Name'].invalid">{{getNameErrorMessage('Name')}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Surname</mat-label>
+        <input formControlName="Surname" matInput placeholder="Surname" required>
+        <mat-error *ngIf="formModel.controls['Surname'].invalid">{{getNameErrorMessage('Surname')}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input formControlName="Email" matInput placeholder="pat@example.com" required>
+        <mat-error *ngIf="formModel.controls['Email'].invalid">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" formControlName="Password" matInput placeholder="Password" required>
+        <mat-error *ngIf="formModel.controls['Password'].invalid">{{getPasswordErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" formControlName="ConfirmPassword" matInput placeholder="Confirm Password" required>
+        <mat-error
+          *ngIf="formModel.controls['ConfirmPassword'].invalid">{{getConfirmPasswordErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <button type="submit" [disabled]="!formModel.valid" mat-raised-button color="primary">Sign Up</button>
+
+  </form>
+</div>
