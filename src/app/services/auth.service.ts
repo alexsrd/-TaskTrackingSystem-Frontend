@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 export class AuthService {
 
   public authorized:boolean = false;
+  public role: string = "";
   constructor(private http: HttpClient,private router:Router) {
   }
 
@@ -46,6 +47,7 @@ export class AuthService {
     roles.forEach(elem=>{
       if(elem == userRole)
         isMatch = true;
+        this.role = userRole;
         return false;
     })
     return isMatch;

@@ -3,6 +3,7 @@ import {FormBuilder,FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {RegisterModel} from "../../models/register-model";
 import {SnackBarService} from "../../services/snack-bar.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +12,7 @@ import {SnackBarService} from "../../services/snack-bar.service";
 })
 export class SignupComponent{
   formModel: FormGroup;
-  constructor(private fb: FormBuilder,private auth:AuthService,private snackBar:SnackBarService) {
+  constructor(private router:Router,private fb: FormBuilder,private auth:AuthService,private snackBar:SnackBarService) {
     this.formModel = this.fb.group({
       Name: ["", Validators.required],
       Surname: ["", Validators.required],
@@ -89,7 +90,10 @@ export class SignupComponent{
   registerUser(user:RegisterModel):void
   {
     this.auth.register(user).subscribe(
-      () => this.snackBar.showMessage("Registration successful")
+      () => {
+        this.snackBar.showMessage("Registration successful");
+        this.router.navigateByUrl('/login');
+      }
     );
   }
 

@@ -7,12 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from "./modules/material.module";
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {InterceptorService} from "./services/interceptor.service";
 import { HomeComponent } from './components/home/home.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import {AuthInterceptor} from "./services/auth.interceptor";
+import { ProjectsComponent } from './components/projects/projects.component';
+import { NewProjectComponent } from './components/new-project/new-project.component';
 
 @NgModule({
   declarations: [
@@ -21,18 +24,22 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
     SignupComponent,
     HomeComponent,
     AdminPanelComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    ProjectsComponent,
+    NewProjectComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRouterModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRouterModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
