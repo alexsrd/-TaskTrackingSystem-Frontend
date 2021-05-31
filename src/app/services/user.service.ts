@@ -7,17 +7,22 @@ import {GlobalConstants} from "../global-constants";
 @Injectable({
   providedIn: 'root'
 })
-export class UserProfileService {
+export class UserService {
 
   constructor(private http:HttpClient) { }
 
   getUsers():Observable<UserProfile[]>
   {
-    return this.http.get<UserProfile[]>(GlobalConstants.API_URL+'/user');
+    return this.http.get<UserProfile[]>(GlobalConstants.API_URL+'/users');
   }
 
   updateUser(user:UserProfile)
   {
-    return this.http.put(GlobalConstants.API_URL+'/user',user);
+    return this.http.put(GlobalConstants.API_URL+'/users',user);
+  }
+
+  getProjectUsers(id:number) : Observable<UserProfile[]>
+  {
+    return this.http.get<UserProfile[]>(GlobalConstants.API_URL + '/users/'+id);
   }
 }

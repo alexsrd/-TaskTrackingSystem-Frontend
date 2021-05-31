@@ -16,6 +16,8 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import {AuthInterceptor} from "./services/auth.interceptor";
 import { ProjectsComponent } from './components/projects/projects.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
+import { ProjectPageComponent } from './components/project-page/project-page.component';
+import { NewTaskComponent } from './components/new-task/new-task.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { NewProjectComponent } from './components/new-project/new-project.compon
     AdminPanelComponent,
     ForbiddenComponent,
     ProjectsComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    ProjectPageComponent,
+    NewTaskComponent
   ],
     imports: [
         BrowserModule,

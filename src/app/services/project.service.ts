@@ -19,4 +19,10 @@ export class ProjectService {
   {
     return this.http.get<Project[]>(GlobalConstants.API_URL+'/projects');
   }
+
+  getProject(id:number)
+  {
+    return this.http.get<Project>(GlobalConstants.API_URL+'/projects/'+id);
+  }
+
 }

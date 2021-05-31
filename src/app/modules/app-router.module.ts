@@ -8,6 +8,8 @@ import {ForbiddenComponent} from "../components/forbidden/forbidden.component";
 import {AdminPanelComponent} from "../components/admin-panel/admin-panel.component";
 import {ProjectsComponent} from "../components/projects/projects.component";
 import {NewProjectComponent} from "../components/new-project/new-project.component";
+import {ProjectPageComponent} from "../components/project-page/project-page.component";
+import {NewTaskComponent} from "../components/new-task/new-task.component";
 
 const routes: Routes = [
   {path: "login", component: LoginComponent},
@@ -16,7 +18,9 @@ const routes: Routes = [
   {path:'forbidden',component:ForbiddenComponent},
   {path:'home/admin-panel',component:AdminPanelComponent,canActivate:[AuthGuard],data:{permittedRoles:['Admin']}},
   {path:'home/projects',component:ProjectsComponent,canActivate:[AuthGuard],data:{permittedRoles:['User','Manager','Admin']}},
-  {path:'home/new-project',component:NewProjectComponent,canActivate:[AuthGuard],data:{permittedRoles:['Manager',]}},
+  {path:'home/new-project',component:NewProjectComponent,canActivate:[AuthGuard],data:{permittedRoles:['Manager']}},
+  {path:'home/project-page/:id',component:ProjectPageComponent,canActivate:[AuthGuard],data:{permittedRoles:['User,Manager']}},
+  {path:'home/project-page/new-task/:id',component:NewTaskComponent,canActivate:[AuthGuard],data:{permittedRoles:['User,Manager']}},
   {path:'',redirectTo:'/login',pathMatch:'full'},
   {path:'**',redirectTo:'/home'}
 ];

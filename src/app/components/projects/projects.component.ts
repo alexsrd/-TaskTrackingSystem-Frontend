@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Project} from "../../models/project";
 import {ProjectService} from "../../services/project.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-projects',
@@ -10,7 +11,7 @@ import {ProjectService} from "../../services/project.service";
 export class ProjectsComponent implements OnInit {
 
   projects?:Project[];
-  constructor(private projectService:ProjectService) {
+  constructor(private projectService:ProjectService,private router:Router) {
 
   }
 
@@ -23,8 +24,12 @@ export class ProjectsComponent implements OnInit {
   {
     this.projectService.getUserProjects().subscribe((data:Project[])=>{
       this.projects = data;
-      console.log(data);
     })
+  }
+
+  openProjectPage(project:Project)
+  {
+    this.router.navigateByUrl('/home/project-page/'+project.id);
   }
 
 }

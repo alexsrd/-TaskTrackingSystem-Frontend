@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {UserProfileService} from "../../services/user-profile.service";
+import {UserService} from "../../services/user.service";
 import {UserProfile} from "../../models/user-profile";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -21,7 +21,7 @@ export class AdminPanelComponent implements OnInit,AfterViewInit  {
   @ViewChild(MatSort) sort!: MatSort;
   roles:string[] = ["User","Manager","Admin"]
 
-  constructor(private userService: UserProfileService,private snackBar:SnackBarService) {
+  constructor(private userService: UserService, private snackBar:SnackBarService) {
   }
 
   ngOnInit(): void {
