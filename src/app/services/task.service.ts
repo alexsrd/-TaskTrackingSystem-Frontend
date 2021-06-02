@@ -20,4 +20,14 @@ export class TaskService {
   {
     return this.http.post<Task>(GlobalConstants.API_URL + '/tasks/'+id,task);
   }
+
+  getUserTasksOnProject(id:number):Observable<Task[]>
+  {
+    return this.http.get<Task[]>(GlobalConstants.API_URL + '/tasks/user-tasks/'+id);
+  }
+
+  updateTask(task:Task):Observable<Task>
+  {
+    return this.http.put<Task>(GlobalConstants.API_URL + '/tasks',task);
+  }
 }

@@ -15,7 +15,7 @@ import {Task} from "../../models/task";
 })
 export class ProjectPageComponent implements OnInit,AfterViewInit {
 
-  displayedColumns: string[] = ['Name', 'Start Date', 'End Date', 'Progress','Assigned To'];
+  displayedColumns: string[] = ['name', 'startDate', 'endDate', 'progress','fullName'];
 
   dataSource!: MatTableDataSource<Task>;
   @ViewChild(MatSort) sort!: MatSort;
@@ -23,6 +23,7 @@ export class ProjectPageComponent implements OnInit,AfterViewInit {
 
   project?:Project;
   tasks?:Task[];
+  id?:number;
 
   constructor(private route:ActivatedRoute,
               private projectService:ProjectService,
@@ -31,16 +32,21 @@ export class ProjectPageComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    const id:number = Number(this.route.snapshot.paramMap.get('id'));
-    this.getTasksByProjectId(id);
-    this.getProject(id);
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.getTasksByProjectId(this.id);
+    this.getProject(this.id);
+  }
+  ngAfterViewInit() {
+    setTimeout(()=>{
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    },1000);
   }
 
   getProject(id:number)
   {
     this.projectService.getProject(id).subscribe((project:Project)=>{
       this.project = project;
-      console.log(project);
     })
   }
 
@@ -48,16 +54,23 @@ export class ProjectPageComponent implements OnInit,AfterViewInit {
   {
     this.taskService.getProjectTasks(id).subscribe((tasks:Task[])=>{
       this.tasks = tasks;
-      console.log(tasks)
       this.dataSource = new MatTableDataSource<Task>(this.tasks);
     })
   }
 
-  ngAfterViewInit() {
-    setTimeout(()=>{
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    },1000);
+  addTask()
+  {
+    this.router.navigateByUrl('home/project-page/new-task/'+this.project?.id);
+  }
+
+  showProjectUsers()
+  {
+    this.router.navigateByUrl("home/project-page/project-users/"+this.id);
+  }
+
+  showUserTasksOnProject()
+  {
+    this.router.navigateByUrl("home/project-page/user-tasks/"+this.id);
   }
 
   applyFilter(event: Event) {
@@ -69,8 +82,5 @@ export class ProjectPageComponent implements OnInit,AfterViewInit {
     }
   }
 
-  addTask()
-  {
-    this.router.navigateByUrl('home/project-page/new-task/'+this.project?.id);
-  }
+
 }

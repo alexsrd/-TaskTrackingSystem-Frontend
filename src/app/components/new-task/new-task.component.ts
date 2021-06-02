@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Task} from "../../models/task";
 import {TaskService} from "../../services/task.service";
 import {SnackBarService} from "../../services/snack-bar.service";
@@ -24,6 +24,7 @@ export class NewTaskComponent implements OnInit {
   userEmails!:(string | undefined)[];
 
   constructor(private route:ActivatedRoute,
+              private router:Router,
               private taskService:TaskService,
               private userService:UserService,
               private snackBar:SnackBarService,
@@ -38,7 +39,7 @@ export class NewTaskComponent implements OnInit {
       Description: ["", Validators.required],
       StartDate: ["", Validators.required],
       EndDate:["", Validators.required],
-      Email:[""]
+      Email:["",Validators.email]
     });
 
     this.filteredOptions = this.formModel.controls['Email'].valueChanges
@@ -60,6 +61,7 @@ export class NewTaskComponent implements OnInit {
   {
     this.taskService.addProjectTask(this.id,this.task).subscribe(()=>{
       this.snackBar.showMessage(`Task ${this.task.name} was successfully added `);
+      this.router.navigateByUrl('home/project-page/'+this.id);
     })
   }
 

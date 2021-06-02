@@ -25,4 +25,9 @@ export class UserService {
   {
     return this.http.get<UserProfile[]>(GlobalConstants.API_URL + '/users/'+id);
   }
+
+  addUserToProject(id:number,email:string) : Observable<UserProfile>
+  {
+    return this.http.put(GlobalConstants.API_URL+'/users/addToProject/'+id,email);
+  }
 }
