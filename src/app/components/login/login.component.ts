@@ -52,6 +52,7 @@ export class LoginComponent {
     this.auth.login(user).subscribe(
       data => {
         localStorage.setItem("token", data.resultToken);
+        this.auth.email = this.formModel.controls["Email"].value;
         this.snackBar.showMessage("Login successful");
         this.router.navigateByUrl('/home');
       }

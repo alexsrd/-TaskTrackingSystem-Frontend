@@ -5,7 +5,6 @@ import {UserProfile} from "../../models/user-profile";
 import {UserService} from "../../services/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
-import {Task} from "../../models/task";
 import {Observable} from "rxjs";
 import {AuthService} from "../../services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -19,7 +18,7 @@ import {SnackBarService} from "../../services/snack-bar.service";
 })
 export class ProjectUsersComponent implements OnInit,AfterViewInit {
   displayedColumns: string[] = ['name', 'surname', 'fullName', 'email'];
-  dataSource!: MatTableDataSource<Task>;
+  dataSource!: MatTableDataSource<UserProfile>;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   filteredOptions!: Observable<(string|undefined)[]>;

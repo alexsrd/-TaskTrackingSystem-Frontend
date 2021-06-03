@@ -28,6 +28,11 @@ export class UserService {
 
   addUserToProject(id:number,email:string) : Observable<UserProfile>
   {
-    return this.http.put(GlobalConstants.API_URL+'/users/addToProject/'+id,email);
+    return this.http.put<UserProfile>(GlobalConstants.API_URL+'/users/addToProject/'+id,new UserProfile('','',email));
+  }
+
+  deleteUser(user:UserProfile)
+  {
+    return this.http.delete(GlobalConstants.API_URL+'/users/'+user.email);
   }
 }

@@ -13,6 +13,8 @@ export class AuthService {
 
   public authorized:boolean = false;
   public role: string = "";
+  public email:string = "";
+
   constructor(private http: HttpClient,private router:Router) {
   }
 

@@ -11,7 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {InterceptorService} from "./services/interceptor.service";
 import { HomeComponent } from './components/home/home.component';
-import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import {AdminPanelComponent} from './components/admin-panel/admin-panel.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import {AuthInterceptor} from "./services/auth.interceptor";
 import { ProjectsComponent } from './components/projects/projects.component';
@@ -20,6 +20,8 @@ import { ProjectPageComponent } from './components/project-page/project-page.com
 import { NewTaskComponent } from './components/new-task/new-task.component';
 import { ProjectUsersComponent } from './components/project-users/project-users.component';
 import { UserTasksComponent } from './components/user-tasks/user-tasks.component';
+import { EditUserDialogComponent } from './components/edit-user-dialog/edit-user-dialog.component';
+import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,11 @@ import { UserTasksComponent } from './components/user-tasks/user-tasks.component
     NewProjectComponent,
     ProjectPageComponent,
     NewTaskComponent,
+    DeleteUserDialogComponent,
     ProjectUsersComponent,
-    UserTasksComponent
+    UserTasksComponent,
+    EditUserDialogComponent,
+    DeleteUserDialogComponent
   ],
     imports: [
         BrowserModule,

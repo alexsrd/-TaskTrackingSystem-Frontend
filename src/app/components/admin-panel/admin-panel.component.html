@@ -6,7 +6,7 @@
     </mat-form-field>
 
     <div class="mat-elevation-z8">
-      <table [dataSource]="dataSource" mat-table matSort>
+      <table [dataSource]="dataSource" mat-table matSort multiTemplateDataRows>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
@@ -40,8 +40,23 @@
           </td>
         </ng-container>
 
-        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+            <div class="example-element-detail"
+                 [@detailExpand]="element == expandedData ? 'expanded' : 'collapsed'">
+              <button mat-raised-button (click)="editUser(element)">Edit</button>
+              <button mat-raised-button (click)="deleteUser(element)">Delete</button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+            class="example-element-row"
+            [class.example-expanded-row]="expandedData === element"
+            (click)="expandedData = expandedData === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 
         <!-- Row shown when there is no matching data. -->
         <tr *matNoDataRow class="mat-row">

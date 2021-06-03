@@ -4,23 +4,15 @@
       Task Management System
     </a>
 
-
-    <ul *ngIf="this.auth.authorized && this.auth.role == 'Admin'" class="nav">
-      <li class="nav-item">
-        <a class="nav-link text-white" routerLink="/home/admin-panel" routerLinkActive="active">Admin panel</a>
-      </li>
-    </ul>
-
-    <div *ngIf="this.auth.authorized">
-      <ul class="nav">
+    <div>
+      <ul *ngIf="this.auth.authorized" class="nav">
+        <li *ngIf = "this.auth.role == 'Admin'" class="nav-item">
+          <a class="nav-link text-white" routerLink="/home/admin-panel" routerLinkActive="active">Admin panel</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="/home/projects" routerLinkActive="active">Projects</a>
         </li>
-      </ul>
-    </div>
-    <div>
-      <ul *ngIf="this.auth.role == 'Manager'" class="nav">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="this.auth.role == 'Manager'">
           <a class="nav-link text-white" routerLink="/home/new-project" routerLinkActive="active">New Project</a>
         </li>
       </ul>
@@ -38,6 +30,11 @@
     </ul>
 
     <ul *ngIf="this.auth.authorized" class="nav justify-content-end">
+      <li>
+        <p class="text-white">
+          {{this.auth.email}}
+        </p>
+      </li>
       <li class="nav-item">
         <a mat-raised-button (click)="this.auth.logout()">Logout</a>
       </li>
