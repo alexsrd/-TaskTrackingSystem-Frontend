@@ -53,13 +53,4 @@ export class EditUserDialogComponent implements OnInit {
     return '';
   }
 
-  getEmailErrorMessage():string {
-    let email = this.formModel.controls["Email"];
-
-    if (email.hasError('required')) {
-      return 'You must enter a value';
-    }
-    return email.hasError('email') ? 'Not a valid email' : '';
-  }
-
 }

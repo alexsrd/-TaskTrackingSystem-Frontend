@@ -22,6 +22,8 @@ import { ProjectUsersComponent } from './components/project-users/project-users.
 import { UserTasksComponent } from './components/user-tasks/user-tasks.component';
 import { EditUserDialogComponent } from './components/edit-user-dialog/edit-user-dialog.component';
 import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
+import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task-dialog.component';
+import { DeleteTaskDialogComponent } from './components/delete-task-dialog/delete-task-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { DeleteUserDialogComponent } from './components/delete-user-dialog/delet
     ProjectUsersComponent,
     UserTasksComponent,
     EditUserDialogComponent,
-    DeleteUserDialogComponent
+    DeleteUserDialogComponent,
+    EditTaskDialogComponent,
+    DeleteTaskDialogComponent
   ],
     imports: [
         BrowserModule,

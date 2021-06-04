@@ -54,6 +54,7 @@ export class UserTasksComponent implements OnInit,AfterViewInit {
     this.taskService.updateTask(task).subscribe(()=>{
       this.snackBar.showMessage("Progress was changed successfully");
       this.ngOnInit();
+      this.ngAfterViewInit();
     })
   }
 

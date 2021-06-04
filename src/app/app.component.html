@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand">
+    <a class="navbar-brand" routerLink="/home">
       Task Management System
     </a>
 
@@ -12,7 +12,7 @@
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="/home/projects" routerLinkActive="active">Projects</a>
         </li>
-        <li class="nav-item" *ngIf="this.auth.role == 'Manager'">
+        <li class="nav-item" *ngIf="this.auth.role == 'Manager' || this.auth.role == 'Admin'">
           <a class="nav-link text-white" routerLink="/home/new-project" routerLinkActive="active">New Project</a>
         </li>
       </ul>

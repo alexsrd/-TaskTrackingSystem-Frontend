@@ -30,4 +30,9 @@ export class TaskService {
   {
     return this.http.put<Task>(GlobalConstants.API_URL + '/tasks',task);
   }
+
+  deleteTask(task:Task)
+  {
+    return this.http.delete<Task>(GlobalConstants.API_URL + '/tasks/'+task.id);
+  }
 }

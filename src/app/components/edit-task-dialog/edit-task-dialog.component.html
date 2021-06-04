@@ -1,0 +1,65 @@
+<h1>Task Edit</h1>
+<mat-dialog-content [formGroup]="formModel">
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Task name</mat-label>
+    <input formControlName="Name" matInput required>
+    <mat-error *ngIf="formModel.controls['Name'].invalid">{{getErrorMessage('Name')}}</mat-error>
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea formControlName="Description" matInput placeholder="Description" required></textarea>
+    <mat-error *ngIf="formModel.controls['Description'].invalid">{{getErrorMessage("Description")}}</mat-error>
+  </mat-form-field>
+</div>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker" required>
+      <input matStartDate formControlName="StartDate" placeholder="Start date">
+      <input matEndDate formControlName="EndDate" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+
+    <mat-error *ngIf="formModel.controls.StartDate.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+    <mat-error *ngIf="formModel.controls.EndDate.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+  </mat-form-field>
+</div>
+
+  <div>
+    <mat-form-field>
+      <mat-select formControlName="Progress">
+        <mat-option *ngFor="let progress of progresses" [value]="progress">
+          {{progress}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Assigned To</mat-label>
+    <input type="text"
+           placeholder="Email"
+           aria-label="Email"
+           matInput
+           formControlName="Email"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="formModel.controls['Email'].invalid">{{getEmailErrorMessage()}}</mat-error>
+  </mat-form-field>
+</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [disabled]="!formModel.valid" (click)="editTask()">Change</button>
+</mat-dialog-actions>
