@@ -28,7 +28,7 @@ export class UserService {
 
   addUserToProject(id:number,email:string) : Observable<UserProfile>
   {
-    return this.http.put<UserProfile>(GlobalConstants.API_URL+'/users/addToProject/'+id,new UserProfile('','',email));
+    return this.http.put<UserProfile>(GlobalConstants.API_URL+'/users/addToProject/'+id,new UserProfile('','','',email));
   }
 
   deleteUser(user:UserProfile)

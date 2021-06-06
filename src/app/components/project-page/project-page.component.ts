@@ -12,6 +12,7 @@ import {DeleteTaskDialogComponent} from "../delete-task-dialog/delete-task-dialo
 import {MatDialog} from "@angular/material/dialog";
 import {SnackBarService} from "../../services/snack-bar.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-project-page',
@@ -43,7 +44,8 @@ export class ProjectPageComponent implements OnInit,AfterViewInit {
               private taskService:TaskService,
               private router:Router,
               private dialog:MatDialog,
-              private snackBar:SnackBarService) {
+              private snackBar:SnackBarService,
+              public auth:AuthService) {
   }
 
   ngOnInit(): void {

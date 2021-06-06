@@ -14,11 +14,11 @@ import { HomeComponent } from './components/home/home.component';
 import {AdminPanelComponent} from './components/admin-panel/admin-panel.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import {AuthInterceptor} from "./services/auth.interceptor";
-import { ProjectsComponent } from './components/projects/projects.component';
+import {DeleteProjectDialog, ProjectsComponent} from './components/projects/projects.component';
 import { NewProjectComponent } from './components/new-project/new-project.component';
 import { ProjectPageComponent } from './components/project-page/project-page.component';
 import { NewTaskComponent } from './components/new-task/new-task.component';
-import { ProjectUsersComponent } from './components/project-users/project-users.component';
+import {DeleteUserFromProject, ProjectUsersComponent} from './components/project-users/project-users.component';
 import { UserTasksComponent } from './components/user-tasks/user-tasks.component';
 import { EditUserDialogComponent } from './components/edit-user-dialog/edit-user-dialog.component';
 import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
@@ -43,7 +43,9 @@ import { DeleteTaskDialogComponent } from './components/delete-task-dialog/delet
     EditUserDialogComponent,
     DeleteUserDialogComponent,
     EditTaskDialogComponent,
-    DeleteTaskDialogComponent
+    DeleteTaskDialogComponent,
+    DeleteProjectDialog,
+    DeleteUserFromProject
   ],
     imports: [
         BrowserModule,

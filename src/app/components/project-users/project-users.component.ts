@@ -10,6 +10,9 @@ import {AuthService} from "../../services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {map, startWith} from "rxjs/operators";
 import {SnackBarService} from "../../services/snack-bar.service";
+import {DeleteProjectDialog} from "../projects/projects.component";
+import {ProjectService} from "../../services/project.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-project-users',
@@ -32,7 +35,15 @@ export class ProjectUsersComponent implements OnInit,AfterViewInit {
               private route:ActivatedRoute,
               public auth:AuthService,
               private fb:FormBuilder,
-              private snackBar:SnackBarService) { }
+              private snackBar:SnackBarService,
+              private projectService:ProjectService,
+              public dialog: MatDialog)
+  {
+    if(this.auth.role==='Manager')
+    {
+      this.displayedColumns.push('action');
+    }
+  }
 
   ngOnInit(): void {
     this.formModel = this.fb.group({
@@ -79,6 +90,20 @@ export class ProjectUsersComponent implements OnInit,AfterViewInit {
     })
   }
 
+  deleteUserFromProject(email:string)
+  {
+    const dialogRef = this.dialog.open(DeleteProjectDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result===true)
+      {
+        this.projectService.deleteUserFromProject(this.projectId,email).subscribe(()=>{
+          this.ngOnInit();
+        })
+      }
+    });
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -95,3 +120,16 @@ export class ProjectUsersComponent implements OnInit,AfterViewInit {
   }
 
 }
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  template: `<h2 mat-dialog-title>Delete Project</h2>
+<mat-dialog-content class="mat-typography">
+  <h4>Are you sure you want to delete this user from project?</h4>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true">Delete</button>
+</mat-dialog-actions>`,
+})
+export class DeleteUserFromProject {}

@@ -56,6 +56,13 @@
             <td mat-cell *matCellDef="let row"> {{row.email}} </td>
           </ng-container>
 
+          <ng-container matColumnDef="action" *ngIf="auth.role==='Manager'">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-raised-button color="warn" (click)="deleteUserFromProject(row.email)">Delete</button>
+            </td>
+          </ng-container>
+
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
