@@ -71,7 +71,7 @@ export class NewTaskComponent implements OnInit {
     this.task.description = this.formModel.controls['Description'].value;
     this.task.startDate = this.formModel.controls['StartDate'].value;
     this.task.endDate = this.formModel.controls['EndDate'].value;
-    this.task.user=new UserProfile('','',this.formModel.controls['Email'].value);
+    this.task.user=new UserProfile('','','',this.formModel.controls['Email'].value);
     this.addProjectTask();
   }
 
